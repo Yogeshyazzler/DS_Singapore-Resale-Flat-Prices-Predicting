@@ -7,7 +7,9 @@ from PIL import Image
 import numpy as np
 import warnings
 import joblib
+from google.colab import drive
 warnings.filterwarnings("ignore")
+drive.mount('/content/drive')
 
 def Town_Name(town_name):
     # Load the fitted encoder
