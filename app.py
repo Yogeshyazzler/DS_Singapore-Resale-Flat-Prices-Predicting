@@ -141,8 +141,8 @@ with st.sidebar:
     st.sidebar.write("")
 
 if select == "Home":
-    '''img = Image.open("/content/drive/MyDrive/ML model file/singapore model.png")
-    st.image(img)'''
+    img = Image.open("/content/drive/MyDrive/ML model file/singapore model.png")
+    st.image(img)
 
     st.header("HDB Flats:")
     st.write('''The majority of Singaporeans live in public housing provided by the HDB.
