@@ -165,7 +165,7 @@ elif select == "Resale_Flat_Input":
         st.write("")
         st.warning("Since large model cannot be displayed here, so have n't included GradientBoostingRegressor, RandomForestRegressor, XGBoostModel.")
         st.write("")
-        st.info("Conclusion - Random Forest Model performs well for this model with 97% Accuracy")
+        st.info("Conclusion - Random Forest Model performs well for this data prediction with 97% Accuracy.")
 
     st.header("Sample Data:")
     st.markdown('''- I have included only necessary columns, based on their importance. For actual data, Please refer the link in about.''')
