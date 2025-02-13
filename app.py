@@ -11,7 +11,7 @@ warnings.filterwarnings("ignore")
 
 def Town_Name(town_name):
     # Load the fitted encoder
-    with open("/content/drive/MyDrive/ML model file/town_encoding.pkl", "rb") as f:
+    with open("town_encoding.pkl", "rb") as f:
         town_encoding = pickle.load(f)
 
     # Convert input to the correct format
@@ -41,7 +41,7 @@ def storey_range(storey):
     return encoder.transform([storey])[0]
 
 def flat_model(model):
-    with open("/content/drive/MyDrive/ML model file/flat_model_encoding.pkl", "rb") as f:
+    with open("flat_model_encoding.pkl", "rb") as f:
         flat_model = pickle.load(f)
 
     encoded_model = flat_model.get(model, -1)
@@ -60,7 +60,7 @@ def linear_predict_price(Flat_type, Storey_range, floor_area_sqm, Lease_commence
     pd_Lease_commence_date = int(Lease_commence_date)
     pd_Flat_Model = flat_model(Flat_Model)
 
-    with open("/content/drive/MyDrive/ML model file/linear_regression_model.pkl", "rb") as f:
+    with open("linear_regression_model.pkl", "rb") as f:
         Linear_model = pickle.load(f)
 
     user_data = np.array([[pd_flat_type, pd_storey_range, pd_floor_area_sqm, pd_Lease_commence_date, pd_year, pd_town, pd_Flat_Model]])
@@ -77,7 +77,7 @@ def decision_predict_price(Flat_type, Storey_range, floor_area_sqm, Lease_commen
     pd_Lease_commence_date = int(Lease_commence_date)
     pd_Flat_Model = flat_model(Flat_Model)
 
-    with open("/content/drive/MyDrive/ML model file/DTR_model (1).pkl", "rb") as f:
+    with open("DTR_model (1).pkl", "rb") as f:
         decision_model = pickle.load(f)
 
     user_data = np.array([[pd_flat_type, pd_storey_range, pd_floor_area_sqm, pd_Lease_commence_date, pd_year, pd_town, pd_Flat_Model]])
@@ -85,7 +85,7 @@ def decision_predict_price(Flat_type, Storey_range, floor_area_sqm, Lease_commen
     price = np.exp(y_pred1[0])
     return price
 
-def Randomforest_predict_price(Flat_type, Storey_range, floor_area_sqm, Lease_commence_date, year_sale, town, Flat_Model):
+'''def Randomforest_predict_price(Flat_type, Storey_range, floor_area_sqm, Lease_commence_date, year_sale, town, Flat_Model):
     pd_year = int(year_sale)
     pd_town = Town_Name(town)
     pd_flat_type = flat_type(Flat_type)
@@ -100,7 +100,7 @@ def Randomforest_predict_price(Flat_type, Storey_range, floor_area_sqm, Lease_co
     user_data = np.array([[pd_flat_type, pd_storey_range, pd_floor_area_sqm, pd_Lease_commence_date, pd_year, pd_town, pd_Flat_Model]])
     y_pred1 = Random_model.predict(user_data)
     price = np.exp(y_pred1[0])
-    return price
+    return price'''
 
 def Gradient_predict_price(Flat_type, Storey_range, floor_area_sqm, Lease_commence_date, year_sale, town, Flat_Model):
     pd_year = int(year_sale)
@@ -111,7 +111,7 @@ def Gradient_predict_price(Flat_type, Storey_range, floor_area_sqm, Lease_commen
     pd_Lease_commence_date = int(Lease_commence_date)
     pd_Flat_Model = flat_model(Flat_Model)
 
-    with open("/content/drive/MyDrive/ML model file/GradientBoostingRegressor.pkl", "rb") as f:
+    with open("GradientBoostingRegressor.pkl", "rb") as f:
         Gradient_model = pickle.load(f)
 
     user_data = np.array([[pd_flat_type, pd_storey_range, pd_floor_area_sqm, pd_Lease_commence_date, pd_year, pd_town, pd_Flat_Model]])
@@ -128,7 +128,7 @@ def xgboost_predict_price(Flat_type, Storey_range, floor_area_sqm, Lease_commenc
     pd_Lease_commence_date = int(Lease_commence_date)
     pd_Flat_Model = flat_model(Flat_Model)
 
-    with open("/content/drive/MyDrive/ML model file/XGB_model.pkl", "rb") as f:
+    with open("XGB_model.pkl", "rb") as f:
         xgboost_model = pickle.load(f)
 
     user_data = np.array([[pd_flat_type, pd_storey_range, pd_floor_area_sqm, pd_Lease_commence_date, pd_year, pd_town, pd_Flat_Model]])
@@ -141,7 +141,7 @@ with st.sidebar:
     st.sidebar.write("")
 
 if select == "Home":
-    img = Image.open("/content/drive/MyDrive/ML model file/singapore model.png")
+    img = Image.open("singapore model.png")
     st.image(img)
 
     st.header("HDB Flats:")
@@ -213,9 +213,9 @@ elif select == "Resale_Flat_Input":
         prediction2 = decision_predict_price(Flat_type, Storey_range, floor_area_sqm, Lease_commence_date, year_sale, town, Flat_Model)
         st.write(f"Decision Tree model prediction : {prediction2}")
         st.write("")
-        prediction3 = Randomforest_predict_price(Flat_type, Storey_range, floor_area_sqm, Lease_commence_date, year_sale, town, Flat_Model)
+        '''prediction3 = Randomforest_predict_price(Flat_type, Storey_range, floor_area_sqm, Lease_commence_date, year_sale, town, Flat_Model)
         st.write(f"Random Forest model prediction : {prediction3}")
-        st.write("")
+        st.write("")'''
         prediction4 = Gradient_predict_price(Flat_type, Storey_range, floor_area_sqm, Lease_commence_date, year_sale, town, Flat_Model)
         st.write(f"Gradient Boosting model prediction : {prediction4}")
         st.write("")
