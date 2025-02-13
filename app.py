@@ -85,23 +85,6 @@ def decision_predict_price(Flat_type, Storey_range, floor_area_sqm, Lease_commen
     price = np.exp(y_pred1[0])
     return price
 
-def xgboost_predict_price(Flat_type, Storey_range, floor_area_sqm, Lease_commence_date, year_sale, town, Flat_Model):
-    pd_year = int(year_sale)
-    pd_town = Town_Name(town)
-    pd_flat_type = flat_type(Flat_type)
-    pd_storey_range = np.log1p(storey_range(Storey_range))
-    pd_floor_area_sqm = float(floor_area_sqm)
-    pd_Lease_commence_date = int(Lease_commence_date)
-    pd_Flat_Model = flat_model(Flat_Model)
-
-    with open("XGB_model.pkl", "rb") as f:
-        xgboost_model = pickle.load(f)
-
-    user_data = np.array([[pd_flat_type, pd_storey_range, pd_floor_area_sqm, pd_Lease_commence_date, pd_year, pd_town, pd_Flat_Model]])
-    y_pred1 = xgboost_model.predict(user_data)
-    price = np.exp(y_pred1[0])
-    return price
-
 with st.sidebar:
     select = option_menu("Main Menu", ["Home", "Resale_Flat_Input", "About"])
     st.sidebar.write("")
@@ -179,9 +162,9 @@ elif select == "Resale_Flat_Input":
         prediction2 = decision_predict_price(Flat_type, Storey_range, floor_area_sqm, Lease_commence_date, year_sale, town, Flat_Model)
         st.write(f"Decision Tree model prediction : {prediction2}")
         st.write("")
-        prediction5 = xgboost_predict_price(Flat_type, Storey_range, floor_area_sqm, Lease_commence_date, year_sale, town, Flat_Model)
-        st.write(f"XGBoost model prediction : {prediction5}")
         st.write("")
+        st.warning("Since large model cannot be displayed here, so have n't included GradientBoostingRegressor, RandomForestRegressor, XGBoostModel.")
+
 
     st.header("Sample Data:")
     st.markdown('''- I have included only necessary columns, based on their importance. For actual data, Please refer the link in about.''')
