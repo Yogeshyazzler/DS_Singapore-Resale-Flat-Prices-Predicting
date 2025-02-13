@@ -205,6 +205,10 @@ elif select == "Resale_Flat_Input":
 
     st.header("Sample Data:")
     st.markdown('''- I have included only necessary columns, based on their importance. For actual data, Please refer the link in about.''')
+    df1=pd.read_csv("Sample_data.csv")
+    columns_to_keep = ['month','town','flat_type','storey_range','floor_area_sqm','flat_model','lease_commence_date','resale_price']
+    dataframe = dataframe[columns_to_keep]
+    st.dataframe(dataframe)
 
 elif select == "About":
   st.header(":blue[Data Collection and Preprocessing:]")
