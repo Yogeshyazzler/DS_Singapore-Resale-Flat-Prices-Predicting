@@ -85,23 +85,6 @@ def decision_predict_price(Flat_type, Storey_range, floor_area_sqm, Lease_commen
     price = np.exp(y_pred1[0])
     return price
 
-'''def Randomforest_predict_price(Flat_type, Storey_range, floor_area_sqm, Lease_commence_date, year_sale, town, Flat_Model):
-    pd_year = int(year_sale)
-    pd_town = Town_Name(town)
-    pd_flat_type = flat_type(Flat_type)
-    pd_storey_range = np.log1p(storey_range(Storey_range))
-    pd_floor_area_sqm = float(floor_area_sqm)
-    pd_Lease_commence_date = int(Lease_commence_date)
-    pd_Flat_Model = flat_model(Flat_Model)
-
-    with open("/content/drive/MyDrive/ML model file/Random_forest_model.pkl", "rb") as f:
-        Random_model = joblib.load(f)
-
-    user_data = np.array([[pd_flat_type, pd_storey_range, pd_floor_area_sqm, pd_Lease_commence_date, pd_year, pd_town, pd_Flat_Model]])
-    y_pred1 = Random_model.predict(user_data)
-    price = np.exp(y_pred1[0])
-    return price'''
-
 def Gradient_predict_price(Flat_type, Storey_range, floor_area_sqm, Lease_commence_date, year_sale, town, Flat_Model):
     pd_year = int(year_sale)
     pd_town = Town_Name(town)
@@ -213,9 +196,6 @@ elif select == "Resale_Flat_Input":
         prediction2 = decision_predict_price(Flat_type, Storey_range, floor_area_sqm, Lease_commence_date, year_sale, town, Flat_Model)
         st.write(f"Decision Tree model prediction : {prediction2}")
         st.write("")
-        '''prediction3 = Randomforest_predict_price(Flat_type, Storey_range, floor_area_sqm, Lease_commence_date, year_sale, town, Flat_Model)
-        st.write(f"Random Forest model prediction : {prediction3}")
-        st.write("")'''
         prediction4 = Gradient_predict_price(Flat_type, Storey_range, floor_area_sqm, Lease_commence_date, year_sale, town, Flat_Model)
         st.write(f"Gradient Boosting model prediction : {prediction4}")
         st.write("")
@@ -225,14 +205,6 @@ elif select == "Resale_Flat_Input":
 
     st.header("Sample Data:")
     st.markdown('''- I have included only necessary columns, based on their importance. For actual data, Please refer the link in about.''')
-    df1=pd.read_csv("/content/drive/MyDrive/Data science Datasets/Resale flat prices based on registration date from Jan-2017 onwards.csv")
-    random_seed = 42
-    dataframe=df1.sample(10,random_state=random_seed)
-    columns_to_keep = ['month','town','flat_type','storey_range','floor_area_sqm','flat_model','lease_commence_date','resale_price']
-    dataframe = dataframe[columns_to_keep]
-    st.dataframe(dataframe)
-
-
 
 elif select == "About":
   st.header(":blue[Data Collection and Preprocessing:]")
