@@ -8,8 +8,6 @@ import numpy as np
 import warnings
 import joblib
 warnings.filterwarnings("ignore")
-from google.colab import drive
-drive.mount('/content/drive')
 
 def Town_Name(town_name):
     # Load the fitted encoder
