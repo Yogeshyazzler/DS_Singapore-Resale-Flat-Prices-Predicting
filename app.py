@@ -85,23 +85,6 @@ def decision_predict_price(Flat_type, Storey_range, floor_area_sqm, Lease_commen
     price = np.exp(y_pred1[0])
     return price
 
-def Gradient_predict_price(Flat_type, Storey_range, floor_area_sqm, Lease_commence_date, year_sale, town, Flat_Model):
-    pd_year = int(year_sale)
-    pd_town = Town_Name(town)
-    pd_flat_type = flat_type(Flat_type)
-    pd_storey_range = np.log1p(storey_range(Storey_range))
-    pd_floor_area_sqm = float(floor_area_sqm)
-    pd_Lease_commence_date = int(Lease_commence_date)
-    pd_Flat_Model = flat_model(Flat_Model)
-
-    with open("GradientBoostingRegressor.pkl", "rb") as f:
-        Gradient_model = pickle.load(f)
-
-    user_data = np.array([[pd_flat_type, pd_storey_range, pd_floor_area_sqm, pd_Lease_commence_date, pd_year, pd_town, pd_Flat_Model]])
-    y_pred1 = Gradient_model.predict(user_data)
-    price = np.exp(y_pred1[0])
-    return price
-
 def xgboost_predict_price(Flat_type, Storey_range, floor_area_sqm, Lease_commence_date, year_sale, town, Flat_Model):
     pd_year = int(year_sale)
     pd_town = Town_Name(town)
@@ -195,9 +178,6 @@ elif select == "Resale_Flat_Input":
         st.write("")
         prediction2 = decision_predict_price(Flat_type, Storey_range, floor_area_sqm, Lease_commence_date, year_sale, town, Flat_Model)
         st.write(f"Decision Tree model prediction : {prediction2}")
-        st.write("")
-        prediction4 = Gradient_predict_price(Flat_type, Storey_range, floor_area_sqm, Lease_commence_date, year_sale, town, Flat_Model)
-        st.write(f"Gradient Boosting model prediction : {prediction4}")
         st.write("")
         prediction5 = xgboost_predict_price(Flat_type, Storey_range, floor_area_sqm, Lease_commence_date, year_sale, town, Flat_Model)
         st.write(f"XGBoost model prediction : {prediction5}")
