@@ -77,4 +77,38 @@ The project involves the following key steps:
 
 ## 📂 Project Structure (Example)
 
-<pre lang="text"> resale-price-predictor/ │ ├── data/ # Raw and processed datasets │ ├── raw/ # Original HDB resale data files │ └── processed/ # Cleaned and feature-engineered data │ ├── notebooks/ # Jupyter notebooks for EDA and modeling │ └── 01_eda_and_modeling.ipynb │ ├── src/ # Source code for core functionality │ ├── __init__.py │ ├── data_preprocessing.py # Data cleaning & transformation │ ├── feature_engineering.py # Feature extraction & encoding │ ├── model_training.py # Model training & evaluation │ └── utils.py # Helper functions │ ├── models/ # Trained models (pickle/joblib) │ └── resale_price_model.pkl │ ├── app/ # Web application (Streamlit / Flask) │ ├── __init__.py │ ├── app.py # Main web app script │ └── templates/ # For HTML templates (Flask/Django) │ ├── deployment/ # Deployment configuration files │ ├── render.yaml # Render.com configuration │ └── Dockerfile # (Optional) Docker container setup │ ├── tests/ # Unit tests for code and model │ └── test_model.py │ ├── requirements.txt # Python dependencies ├── README.md # Project documentation ├── report.pdf # Final project report └── .gitignore # Git ignored files </pre>
+resale-price-predictor/
+│
+├── data/                        # Raw and processed datasets
+│   ├── raw/                     # Original HDB resale data files
+│   └── processed/               # Cleaned and feature-engineered data
+│
+├── notebooks/                   # Jupyter notebooks for EDA and modeling
+│   └── 01_eda_and_modeling.ipynb
+│
+├── src/                         # Source code for core functionality
+│   ├── __init__.py
+│   ├── data_preprocessing.py    # Data cleaning & transformation
+│   ├── feature_engineering.py   # Feature extraction & encoding
+│   ├── model_training.py        # Model training & evaluation
+│   └── utils.py                 # Helper functions
+│
+├── models/                      # Trained models (pickle/joblib)
+│   └── resale_price_model.pkl
+│
+├── app/                         # Web application (Streamlit / Flask / Django)
+│   ├── __init__.py
+│   ├── app.py                   # Main web app script
+│   └── templates/               # For HTML templates (if using Flask/Django)
+│
+├── deployment/                  # Deployment configuration files
+│   ├── render.yaml              # Render.com configuration
+│   └── Dockerfile               # Optional: Docker container setup
+│
+├── tests/                       # Unit and integration tests
+│   └── test_model.py
+│
+├── requirements.txt             # Python dependencies
+├── README.md                    # Project documentation
+├── report.pdf                   # Final project report
+└── .gitignore                   # Files to ignore in Git
